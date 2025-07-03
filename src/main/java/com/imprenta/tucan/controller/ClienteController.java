@@ -28,7 +28,7 @@ public class ClienteController {
     @GetMapping
     public String listarClientes(Model model) {
         model.addAttribute("clientes", clienteService.listarClientes());
-        return "clientes/lista-clientes"; // Thymeleaf template
+        return "clientes/gestion-de-clientes"; // Thymeleaf template
     }
 
     // Mostrar formulario para nuevo cliente
@@ -38,7 +38,7 @@ public class ClienteController {
         model.addAttribute("cliente", cliente);
         model.addAttribute("localidades", localidadService.listarLocalidades());
         model.addAttribute("provincias", provinciaService.listarProvincias());
-        return "clientes/form-cliente"; // Thymeleaf template
+        return "clientes/alta-cliente"; // Thymeleaf template
     }
 
     // Guardar cliente (nuevo o editado)

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Cliente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-8">
+    <h1 class="text-2xl mb-4">Formulario Cliente</h1>
+
+    <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post" class="space-y-4">
+        <input type="hidden" th:field="*{idCliente}" />
+
+        <div>
+            <label>Nombre:</label>
+            <input type="text" th:field="*{nombre}" class="border p-2 w-full"/>
+        </div>
+
+        <div>
+            <label>Apellido:</label>
+            <input type="text" th:field="*{apellido}" class="border p-2 w-full"/>
+        </div>
+
+        <div>
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" class="border p-2 w-full"/>
+        </div>
+
+        <!-- Localidad -->
+        <div>
+            <label>Localidad:</label>
+            <select th:field="*{localidad}" class="border p-2 w-full">
+                <option th:each="loc : ${localidades}" 
+                        th:value="${loc.idLocalidad}" 
+                        th:text="${loc.nombre}"></option>
+            </select>
+        </div>
+
+        <!-- Provincia si quieres manejarla por separado -->
+        <div>
+            <label>Provincia:</label>
+            <select th:field="*{localidad.provincia}" class="border p-2 w-full">
+                <option th:each="prov : ${provincias}"
+                        th:value="${prov.idProvincia}"
+                        th:text="${prov.nombre}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">
+            Guardar Cliente
+        </button>
+    </form>
+</body>
+</html>

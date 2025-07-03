@@ -9,5 +9,4 @@ public class TucanApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TucanApplication.class, args);
 	}
-
 }

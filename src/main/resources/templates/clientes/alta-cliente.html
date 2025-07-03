@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Imprenta Tucán - Registro de Cliente</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    rel="stylesheet"
+    as="style"
+    onload="this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+  />
+</head>
+<body class="bg-gray-50" style="font-family: Inter, 'Noto Sans', sans-serif;">
+  <div class="flex flex-col min-h-screen">
+    <!-- HEADER -->
+    <header class="flex items-center justify-between border-b border-[#e9edf2] px-10 py-3">
+      <div class="flex items-center gap-4 text-[#0f151a]">
+        <h2 class="text-lg font-bold">Imprenta Tucán</h2>
+      </div>
+      <nav class="flex gap-6">
+        <a class="text-[#0f151a]" href="/">Inicio</a>
+        <a class="text-[#0f151a] font-bold" href="/clientes">Clientes</a>
+        <a class="text-[#0f151a]" href="#">Pedidos</a>
+      </nav>
+    </header>
+
+    <!-- FORMULARIO -->
+    <div class="flex justify-center px-40 py-8 flex-1">
+      <div class="w-full max-w-[512px]">
+        <h1 class="text-2xl font-bold mb-6 text-[#0f151a]">Registro / Modificación de Cliente</h1>
+
+        <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post" class="space-y-4">
+          <!-- NOMBRE -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Nombre</span>
+            <input th:field="*{nombre}" placeholder="Ingrese el nombre"
+              class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
+          </label>
+
+          <!-- APELLIDO -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Apellido</span>
+            <input th:field="*{apellido}" placeholder="Ingrese el apellido"
+              class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
+          </label>
+
+          <!-- DIRECCIÓN -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Dirección</span>
+            <input th:field="*{direccion}" placeholder="Ingrese la dirección"
+              class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
+          </label>
+
+          <!-- LOCALIDAD (con Provincia) -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Localidad</span>
+            <select th:field="*{localidad.idLocalidad}"
+              class="form-select rounded-xl bg-[#e9edf2] h-14 p-4">
+              <option value="">Seleccione una localidad</option>
+              <option th:each="loc : ${localidades}"
+                      th:value="${loc.idLocalidad}"
+                      th:text="${loc.nombre + ' (' + loc.provincia.nombre + ')'}">
+              </option>
+            </select>
+          </label>
+
+          <!-- TELÉFONO -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Teléfono/Celular</span>
+            <input th:field="*{telefono}" placeholder="Ingrese el teléfono/celular"
+              class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
+          </label>
+
+          <!-- EMAIL -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Correo electrónico</span>
+            <input th:field="*{email}" placeholder="Ingrese el correo electrónico"
+              class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
+          </label>
+
+          <!-- FECHA DE ALTA -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Fecha de Alta</span>
+            <input type="date" th:field="*{fechaAlta}"
+              class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
+          </label>
+
+          <!-- ESTADO -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Estado del Cliente</span>
+            <select th:field="*{estado}" class="form-select rounded-xl bg-[#e9edf2] h-14 p-4">
+              <option value="">Seleccione el estado</option>
+              <option value="Activo">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+          </label>
+
+          <!-- BOTONES -->
+          <div class="flex justify-end gap-3">
+            <a href="/clientes"
+              class="rounded-full bg-[#e9edf2] px-4 py-2 text-sm font-bold text-[#0f151a]">Cancelar</a>
+            <button type="submit"
+              class="rounded-full bg-[#2e7ac0] px-4 py-2 text-sm font-bold text-white">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
