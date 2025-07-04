@@ -56,7 +56,7 @@ public class ClienteController {
         model.addAttribute("cliente", cliente);
         model.addAttribute("localidades", localidadService.listarLocalidades());
         model.addAttribute("provincias", provinciaService.listarProvincias());
-        return "clientes/form-cliente";
+        return "clientes/alta-cliente";
     }
 
     // Eliminar cliente

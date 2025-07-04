@@ -30,6 +30,9 @@
         <h1 class="text-2xl font-bold mb-6 text-[#0f151a]">Registro / Modificación de Cliente</h1>
 
         <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post" class="space-y-4">
+
+          <input type="hidden" th:field="*{idCliente}" />
+          
           <!-- NOMBRE -->
           <label class="flex flex-col">
             <span class="text-base font-medium pb-1">Nombre</span>
@@ -59,7 +62,7 @@
               <option value="">Seleccione una localidad</option>
               <option th:each="loc : ${localidades}"
                       th:value="${loc.idLocalidad}"
-                      th:text="${loc.nombre + ' (' + loc.provincia.nombre + ')'}">
+                      th:text="${loc.nombreLocalidad + ' (' + loc.provincia.nombreProvincia + ')'}">
               </option>
             </select>
           </label>

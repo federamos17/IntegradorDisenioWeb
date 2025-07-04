@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900"
+    />
+    <title>Gestión de Localidades</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-gray-50 group/design-root overflow-x-hidden"
+      style='font-family: Inter, "Noto Sans", sans-serif;'
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <!-- Header -->
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e9edf2] px-10 py-3"
+        >
+          <div class="flex items-center gap-4 text-[#0f151a]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-[#0f151a] text-lg font-bold leading-tight tracking-[-0.015em]">
+              Aplicación de Gestión Localidades
+            </h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#0f151a] text-sm font-medium leading-normal" href="#">Inicio</a>
+              <a class="text-[#0f151a] text-sm font-medium leading-normal" href="#">Localidades</a>
+              <a class="text-[#0f151a] text-sm font-medium leading-normal" href="#">Acerca de</a>
+            </div>
+          </div>
+        </header>
+
+        <!-- Contenido principal -->
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <h2 class="text-[#0f151a] text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">
+              Gestionar Información de la Localidad
+            </h2>
+
+            <!-- Formulario -->
+            <form
+              th:action="@{/localidades/guardar}"
+              th:object="${localidad}"
+              method="post"
+              class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3"
+            >
+              <!-- Nombre localidad -->
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#0f151a] text-base font-medium leading-normal pb-2">
+                  Nombre de Localidad
+                </p>
+                <input
+                  th:field="*{nombreLocalidad}"
+                  placeholder="Ingrese el Nombre de Localidad"
+                  class="form-input flex w-full rounded-xl border border-[#d2dce4] bg-gray-50 h-14 p-[15px] text-base"
+                />
+              </label>
+
+              <!-- Código Postal -->
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#0f151a] text-base font-medium leading-normal pb-2">
+                  Código Postal
+                </p>
+                <input
+                  th:field="*{codPostal}"
+                  placeholder="Ingrese el Código Postal"
+                  class="form-input flex w-full rounded-xl border border-[#d2dce4] bg-gray-50 h-14 p-[15px] text-base"
+                />
+              </label>
+
+              <!-- Provincia -->
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#0f151a] text-base font-medium leading-normal pb-2">
+                  Provincia
+                </p>
+                <select
+                  th:field="*{provincia.idProvincia}"
+                  class="form-select flex w-full rounded-xl border border-[#d2dce4] bg-gray-50 h-14 p-[15px] text-base"
+                >
+                  <option value="">Seleccione una provincia</option>
+                  <option
+                    th:each="prov : ${provincias}"
+                    th:value="${prov.idProvincia}"
+                    th:text="${prov.nombreProvincia}"
+                  ></option>
+                </select>
+              </label>
+
+              <!-- Botón guardar -->
+              <button
+                type="submit"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center rounded-full h-10 px-4 bg-[#2e7ac0] text-gray-50 text-sm font-bold"
+              >
+                <span class="truncate">Guardar Localidad</span>
+              </button>
+            </form>
+
+            <!-- Tabla de localidades -->
+            <h2 class="text-[#0f151a] text-[22px] font-bold px-4 pb-3 pt-5">
+              Localidades Registradas
+            </h2>
+
+            <div class="p-4">
+              <table class="min-w-full border-collapse border border-gray-200">
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">ID</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Nombre</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Código Postal</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Provincia</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    th:each="loc : ${localidades}"
+                    class="border-t border-gray-200"
+                  >
+                    <td class="px-4 py-2 text-sm text-gray-900" th:text="${loc.idLocalidad}"></td>
+                    <td class="px-4 py-2 text-sm text-gray-900" th:text="${loc.nombreLocalidad}"></td>
+                    <td class="px-4 py-2 text-sm text-gray-900" th:text="${loc.codPostal}"></td>
+                    <td class="px-4 py-2 text-sm text-gray-900" th:text="${loc.provincia.nombreProvincia}"></td>
+                    <td class="px-4 py-2 text-sm">
+                      <a
+                        th:href="@{'/localidades/eliminar/' + ${loc.idLocalidad}}"
+                        class="text-red-600 hover:text-red-800 font-medium"
+                      >Eliminar</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
