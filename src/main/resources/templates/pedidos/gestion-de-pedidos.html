@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Imprenta Tucán - Gestión de Pedidos</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    rel="stylesheet"
+    as="style"
+    onload="this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+  />
+</head>
+<body>
+  <!-- Header reutilizable -->
+  <div th:replace="fragmentos/header :: header"></div>
+
+  <div class="flex flex-col min-h-screen">
+    <!-- CONTENIDO -->
+    <div class="flex justify-center px-40 py-8 flex-1">
+      <div class="w-full max-w-[1200px]">
+        <div class="flex justify-between items-center mb-4">
+          <h1 class="text-2xl font-bold text-[#0d141c]">Gestión de Pedidos</h1>
+          <a href="/pedidos/nuevo" class="rounded-lg px-4 py-2 bg-[#0c7ff2] text-slate-50 text-sm font-semibold">
+            + Agregar Pedido
+          </a>
+        </div>
+
+        <!-- TABLA -->
+        <div class="overflow-x-auto rounded-lg border border-[#cedbe8] bg-slate-50">
+          <table class="min-w-full">
+            <thead>
+              <tr class="bg-slate-50 text-left text-sm text-[#0d141c] font-semibold">
+                <th class="px-4 py-2">ID</th>
+                <th class="px-4 py-2">Cliente</th>
+                <th class="px-4 py-2">Fecha Pedido</th>
+                <th class="px-4 py-2">Descripción</th>
+                <th class="px-4 py-2">Estado</th>
+                <th class="px-4 py-2">Presupuesto</th>
+                <th class="px-4 py-2">Fecha Entrega</th>
+                <th class="px-4 py-2">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="pedido : ${pedidos}" class="border-t border-[#cedbe8] hover:bg-slate-100">
+                <td class="px-4 py-2" th:text="${pedido.idPedido}"></td>
+                <td class="px-4 py-2" th:text="${pedido.cliente.nombre} + ' ' + ${pedido.cliente.apellido}"></td>
+                <td class="px-4 py-2" th:text="${pedido.fechaPedido}"></td>
+                <td class="px-4 py-2" th:text="${pedido.descripcionTrabajo}"></td>
+                <td class="px-4 py-2" th:text="${pedido.estado}"></td>
+                <td class="px-4 py-2" th:text="${pedido.presupuesto}"></td>
+                <td class="px-4 py-2" th:text="${pedido.fechaEntrega}"></td>
+                <td class="px-4 py-2">
+                  <a th:href="@{'/pedidos/ver/' + ${pedido.idPedido}}"
+                    class="text-blue-600 hover:underline">Ver</a>
+                  |
+                  <a th:href="@{'/pedidos/editar/' + ${pedido.idPedido}}"
+                    class="text-green-600 hover:underline">Editar</a>
+                  |
+                  <a th:href="@{'/pedidos/eliminar/' + ${pedido.idPedido}}"
+                    class="text-red-600 hover:underline">Eliminar</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

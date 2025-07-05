@@ -10,19 +10,10 @@
     href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
   />
 </head>
-<body class="bg-gray-50" style="font-family: Inter, 'Noto Sans', sans-serif;">
+<body>
+  <!-- Header  usamos fragmentos para poner el mismo header en todas las páginas-->
+  <div th:replace="fragmentos/header :: header"></div>
   <div class="flex flex-col min-h-screen">
-    <!-- HEADER -->
-    <header class="flex items-center justify-between border-b border-[#e9edf2] px-10 py-3">
-      <div class="flex items-center gap-4 text-[#0f151a]">
-        <h2 class="text-lg font-bold">Imprenta Tucán</h2>
-      </div>
-      <nav class="flex gap-6">
-        <a class="text-[#0f151a]" href="/">Inicio</a>
-        <a class="text-[#0f151a] font-bold" href="/clientes">Clientes</a>
-        <a class="text-[#0f151a]" href="#">Pedidos</a>
-      </nav>
-    </header>
 
     <!-- FORMULARIO -->
     <div class="flex justify-center px-40 py-8 flex-1">

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Detalle de Cliente</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+</head>
+<body>
+    <!-- Header  usamos fragmentos para poner el mismo header en todas las páginas-->
+    <div th:replace="fragmentos/header :: header"></div>
+  <div class="max-w-xl mx-auto p-8">
+    <h1 class="text-2xl font-bold mb-4">Detalle del Cliente</h1>
+
+    <div class="space-y-2">
+      <p><strong>Nombre:</strong> <span th:text="${cliente.nombre}">Juan</span></p>
+      <p><strong>Apellido:</strong> <span th:text="${cliente.apellido}">Pérez</span></p>
+      <p><strong>Dirección:</strong> <span th:text="${cliente.direccion}">Calle 123</span></p>
+      <p><strong>Localidad:</strong>
+        <span th:text="${cliente.localidad.nombreLocalidad}">Posadas</span>
+        (<span th:text="${cliente.localidad.provincia.nombreProvincia}">Misiones</span>)
+      </p>
+      <p><strong>Teléfono:</strong> <span th:text="${cliente.telefono}">123456789</span></p>
+      <p><strong>Email:</strong> <span th:text="${cliente.email}">juan@email.com</span></p>
+      <p><strong>Fecha Alta:</strong> <span th:text="${cliente.fechaAlta}">2025-07-02</span></p>
+      <p><strong>Estado:</strong> <span th:text="${cliente.estado}">Activo</span></p>
+    </div>
+
+    <div class="mt-6">
+      <a href="/clientes" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Volver a Clientes</a>
+    </div>
+  </div>
+</body>
+</html>

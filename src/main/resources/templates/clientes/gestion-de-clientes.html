@@ -10,21 +10,11 @@
     href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
   />
 </head>
-<body class="bg-slate-50" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<body>
+  <!-- Header  usamos fragmentos para poner el mismo header en todas las páginas-->
+  <div th:replace="fragmentos/header :: header"></div>
+
   <div class="flex flex-col min-h-screen">
-    <!-- HEADER -->
-    <header class="flex items-center justify-between border-b border-[#e7edf4] px-10 py-3">
-      <div class="flex items-center gap-8">
-        <div class="flex items-center gap-4 text-[#0d141c]">
-          <h2 class="text-lg font-bold">Imprenta Tucán</h2>
-        </div>
-        <nav class="flex items-center gap-6">
-          <a class="text-[#0d141c]" href="#">Dashboard</a>
-          <a class="text-[#0d141c] font-bold" href="#">Clientes</a>
-          <a class="text-[#0d141c]" href="#">Pedidos</a>
-        </nav>
-      </div>
-    </header>
 
     <!-- CONTENIDO -->
     <div class="flex justify-center px-40 py-8 flex-1">
@@ -59,12 +49,14 @@
                 <td class="px-4 py-2" th:text="${cliente.telefono}"></td>
                 <td class="px-4 py-2" th:text="${cliente.email}"></td>
                 <td class="px-4 py-2">
+                  <a th:href="@{'/clientes/ver/' + ${cliente.idCliente}}" 
+                    class="text-blue-600 hover:underline">Ver</a>
+                  |
                   <a th:href="@{'/clientes/editar/' + ${cliente.idCliente}}"
-                     class="text-blue-600 hover:underline mr-2">Editar</a>
+                    class="text-green-600 hover:underline">Editar</a>
                   |
                   <a th:href="@{'/clientes/eliminar/' + ${cliente.idCliente}}"
-                     onclick="return confirm('¿Seguro que quieres eliminar este cliente?');"
-                     class="text-red-600 hover:underline ml-2">Eliminar</a>
+                    class="text-red-600 hover:underline">Eliminar</a>
                 </td>
               </tr>
             </tbody>

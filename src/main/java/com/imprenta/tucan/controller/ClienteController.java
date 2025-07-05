@@ -31,6 +31,15 @@ public class ClienteController {
         return "clientes/gestion-de-clientes"; // Thymeleaf template
     }
 
+    // Ver detalle del cliente
+    @GetMapping("/ver/{id}")
+    public String verDetalleCliente(@PathVariable Long id, Model model) {
+        Cliente cliente = clienteService.obtenerClientePorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("ID inválido: " + id));
+        model.addAttribute("cliente", cliente);
+        return "clientes/detalle-cliente"; // nueva vista
+    }
+    
     // Mostrar formulario para nuevo cliente
     @GetMapping("/nuevo")
     public String mostrarFormularioNuevoCliente(Model model) {

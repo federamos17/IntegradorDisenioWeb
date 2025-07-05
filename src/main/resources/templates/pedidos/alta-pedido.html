@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Imprenta Tucán - Registro de Pedido</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    rel="stylesheet"
+    as="style"
+    onload="this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+  />
+</head>
+<body>
+  <!-- Header fragmento reutilizable -->
+  <div th:replace="fragmentos/header :: header"></div>
+
+  <div class="flex flex-col min-h-screen">
+    <!-- FORMULARIO -->
+    <div class="flex justify-center px-40 py-8 flex-1">
+      <div class="w-full max-w-[512px]">
+        <h1 class="text-2xl font-bold mb-6 text-[#0f151a]">Registro / Modificación de Pedido</h1>
+
+        <form th:action="@{/pedidos/guardar}" th:object="${pedido}" method="post" class="space-y-4">
+          <!-- ID oculto para editar -->
+          <input type="hidden" th:field="*{idPedido}" />
+
+          <!-- Cliente -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Cliente</span>
+            <select th:field="*{cliente.idCliente}" class="form-select rounded-xl bg-[#e9edf2] h-14 p-4">
+              <option value="">Seleccione un cliente</option>
+              <option th:each="cliente : ${clientes}"
+                      th:value="${cliente.idCliente}"
+                      th:text="${cliente.nombre} + ' ' + ${cliente.apellido}">
+              </option>
+            </select>
+          </label>
+
+          <!-- Fecha de Pedido -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Fecha de Pedido</span>
+            <input type="date" th:field="*{fechaPedido}"
+              class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
+          </label>
+
+          <!-- Descripción del Trabajo -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Descripción del Trabajo</span>
+            <textarea th:field="*{descripcionTrabajo}" placeholder="Detalle del trabajo"
+              class="form-textarea rounded-xl bg-[#e9edf2] p-4 h-24"></textarea>
+          </label>
+
+          <!-- Estado -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Estado del Pedido</span>
+            <select th:field="*{estado}" class="form-select rounded-xl bg-[#e9edf2] h-14 p-4">
+              <option value="">Seleccione el estado</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="En Proceso">En Proceso</option>
+              <option value="Finalizado">Finalizado</option>
+              <option value="Entregado">Entregado</option>
+            </select>
+          </label>
+
+          <!-- Presupuesto -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Presupuesto</span>
+            <input type="number" step="0.01" th:field="*{presupuesto}" placeholder="Ej: 1000.00"
+              class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
+          </label>
+
+          <!-- Fecha de Entrega -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Fecha de Entrega</span>
+            <input type="date" th:field="*{fechaEntrega}"
+              class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
+          </label>
+
+          <!-- Observaciones -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Observaciones</span>
+            <textarea th:field="*{observaciones}" placeholder="Observaciones del pedido"
+              class="form-textarea rounded-xl bg-[#e9edf2] p-4 h-24"></textarea>
+          </label>
+
+          <!-- Archivo de Diseño (opcional) -->
+          <label class="flex flex-col">
+            <span class="text-base font-medium pb-1">Archivo de Diseño</span>
+            <input th:field="*{archivoDiseño}" placeholder="URL o nombre del archivo"
+              class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
+          </label>
+
+          <!-- BOTONES -->
+          <div class="flex justify-end gap-3">
+            <a href="/pedidos"
+              class="rounded-full bg-[#e9edf2] px-4 py-2 text-sm font-bold text-[#0f151a]">Cancelar</a>
+            <button type="submit"
+              class="rounded-full bg-[#2e7ac0] px-4 py-2 text-sm font-bold text-white">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
