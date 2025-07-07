@@ -50,6 +50,10 @@ public class PedidoController {
     public String mostrarFormularioEditarPedido(@PathVariable Long id, Model model) {
         Pedido pedido = pedidoService.obtenerPedidoPorId(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID de pedido inválido: " + id));
+
+        System.out.println("Fecha Pedido: " + pedido.getFechaPedido()); // DEBUG
+        System.out.println("Fecha Entrega: " + pedido.getFechaEntrega()); // DEBUG
+
         model.addAttribute("pedido", pedido);
 
         // Lista de clientes para seleccionar si se quiere cambiar

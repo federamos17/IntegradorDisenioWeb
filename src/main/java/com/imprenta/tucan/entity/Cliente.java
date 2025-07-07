@@ -5,6 +5,8 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -21,6 +23,8 @@ public class Cliente {
     private String direccion;
     private String telefono;
     private String email;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaAlta;
 
     private String estado;  // Ejemplo: ACTIVO, INACTIVO

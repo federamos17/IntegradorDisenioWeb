@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Detalle de Pedido</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+</head>
+<body>
+  <!-- Header: usamos fragmentos para mantener consistencia -->
+  <div th:replace="fragmentos/header :: header"></div>
+
+  <div class="max-w-xl mx-auto p-8">
+    <h1 class="text-2xl font-bold mb-4">Detalle del Pedido</h1>
+
+    <div class="space-y-2">
+      <p><strong>ID:</strong> <span th:text="${pedido.idPedido}">1</span></p>
+      <p><strong>Fecha de Pedido:</strong> <span th:text="${pedido.fechaPedido}">2025-07-02</span></p>
+      <p><strong>Descripción del Trabajo:</strong> <span th:text="${pedido.descripcionTrabajo}">Impresión de folletos</span></p>
+      <p><strong>Estado:</strong> <span th:text="${pedido.estado}">Pendiente</span></p>
+      <p><strong>Presupuesto:</strong> <span th:text="${pedido.presupuesto}">$150,000</span></p>
+      <p><strong>Fecha de Entrega:</strong> <span th:text="${pedido.fechaEntrega}">2025-07-10</span></p>
+      <p><strong>Observaciones:</strong> <span th:text="${pedido.observaciones}">Entrega urgente</span></p>
+      <p><strong>Archivo de Diseño:</strong>
+        <span th:if="${pedido.archivoDiseño != null}" th:text="${pedido.archivoDiseño}">diseño.pdf</span>
+        <span th:if="${pedido.archivoDiseño == null}">Sin archivo adjunto</span>
+      </p>
+      <p><strong>Cliente:</strong>
+        <span th:text="${pedido.cliente.nombre}">Juan</span>
+        <span th:text="${pedido.cliente.apellido}">Pérez</span>
+        (ID: <span th:text="${pedido.cliente.idCliente}">3</span>)
+      </p>
+    </div>
+
+    <div class="mt-6">
+      <a href="/pedidos" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Volver a Pedidos</a>
+    </div>
+  </div>
+</body>
+</html>
