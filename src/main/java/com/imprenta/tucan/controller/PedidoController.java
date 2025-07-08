@@ -1,13 +1,16 @@
 package com.imprenta.tucan.controller;
 
 import com.imprenta.tucan.entity.Pedido;
-import com.imprenta.tucan.entity.Cliente;
 import com.imprenta.tucan.service.PedidoService;
 import com.imprenta.tucan.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 @RequestMapping("/pedidos")
@@ -37,13 +40,43 @@ public class PedidoController {
 
         return "pedidos/alta-pedido";
     }
-
+    /* 
     // ✅ Guardar pedido (nuevo o editado)
     @PostMapping("/guardar")
     public String guardarPedido(@ModelAttribute("pedido") Pedido pedido) {
         pedidoService.guardarPedido(pedido);
         return "redirect:/pedidos";
+    }*/
+
+    @PostMapping("/guardar")
+    public String guardarPedido(
+        @ModelAttribute("pedido") Pedido pedido,
+        @RequestParam("archivo") MultipartFile archivo
+    ) {
+        try {
+            System.out.println("Archivo nombre original: " + archivo.getOriginalFilename());
+            System.out.println("Archivo tamaño: " + archivo.getSize());
+
+            if (!archivo.isEmpty()) {
+                String nombreArchivo = System.currentTimeMillis() + "_" + archivo.getOriginalFilename();
+
+                // 👉 Usa ruta absoluta local para test
+                Path ruta = Paths.get("C:/Users/Ramos/Documents/mi-proyecto/uploads").resolve(nombreArchivo);
+
+                Files.createDirectories(ruta.getParent());
+                archivo.transferTo(ruta.toFile());
+
+                pedido.setArchivoDiseño(nombreArchivo);
+            }
+
+            pedidoService.guardarPedido(pedido);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/pedidos";
     }
+
 
     // ✅ Mostrar formulario para editar pedido
     @GetMapping("/editar/{id}")

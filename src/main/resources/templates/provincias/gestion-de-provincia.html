@@ -40,18 +40,19 @@
               class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3"
             >
               <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#0f151a] text-base font-medium leading-normal pb-2">
-                  Nombre de Provincia
-                </p>
+                <span class="text-base font-medium pb-1">
+                  Nombre de la Provincia <span class="text-red-600">*</span>
+                </span>
                 <input
                   th:field="*{nombreProvincia}"
                   placeholder="Ingrese el Nombre de Provincia"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0f151a] focus:outline-0 focus:ring-0 border border-[#d2dce4] bg-gray-50 focus:border-[#d2dce4] h-14 placeholder:text-[#56748f] p-[15px] text-base font-normal leading-normal"
+                  required
+                  class="form-input rounded-xl bg-[#e9edf2] h-14 p-4"
                 />
               </label>
               <button
                 type="submit"
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#2e7ac0] text-gray-50 text-sm font-bold leading-normal tracking-[0.015em]"
+                class="rounded-full bg-[#2e7ac0] text-white px-4 py-2 text-sm font-bold hover:bg-[#215a8f] transition"
               >
                 <span class="truncate">Guardar Provincia</span>
               </button>
@@ -64,10 +65,10 @@
               Provincias Registradas
             </h2>
 
-            <div class="p-4">
-              <table class="min-w-full border-collapse border border-gray-200">
-                <thead class="bg-gray-100">
-                  <tr>
+            <div class="overflow-x-auto rounded-lg border border-[#cedbe8] bg-slate-50">
+              <table class="min-w-full text-left text-sm">
+                <thead class="bg-slate-50 font-semibold">
+                  <tr class="hover:bg-slate-100">
                     <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">ID</th>
                     <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Nombre</th>
                     <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Acciones</th>
@@ -83,7 +84,7 @@
                     <td class="px-4 py-2 text-sm">
                       <a
                         th:href="@{'/provincias/eliminar/' + ${prov.idProvincia}}"
-                        class="text-red-600 hover:text-red-800 font-medium"
+                        class="text-red-600 hover:underline"
                         >Eliminar</a
                       >
                     </td>
@@ -96,5 +97,7 @@
         </div>
       </div>
     </div>
+  <!-- Footer igual para todas las paginas, usando fragmentos -->
+  <div th:replace="fragmentos/footer :: footer"></div>
   </body>
 </html>

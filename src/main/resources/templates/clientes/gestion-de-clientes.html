@@ -21,34 +21,34 @@
       <div class="w-full max-w-[960px]">
         <div class="flex justify-between items-center mb-4">
           <h1 class="text-2xl font-bold text-[#0d141c]">Gestión de Clientes</h1>
-          <a href="/clientes/nuevo" class="rounded-lg px-4 py-2 bg-[#0c7ff2] text-slate-50 text-sm font-semibold">
+          <a href="/clientes/nuevo" class="rounded-full bg-[#2e7ac0] text-white px-4 py-2 text-sm font-bold hover:bg-[#215a8f] transition">
             + Agregar Cliente
           </a>
         </div>
 
         <!-- TABLA -->
         <div class="overflow-x-auto rounded-lg border border-[#cedbe8] bg-slate-50">
-          <table class="min-w-full">
-            <thead>
-              <tr class="bg-slate-50 text-left text-sm text-[#0d141c] font-semibold">
-                <th class="px-4 py-2">ID</th>
-                <th class="px-4 py-2">Nombre</th>
-                <th class="px-4 py-2">Apellido</th>
-                <th class="px-4 py-2">Dirección</th>
-                <th class="px-4 py-2">Teléfono</th>
-                <th class="px-4 py-2">Email</th>
-                <th class="px-4 py-2">Acciones</th>
+          <table class="min-w-full text-left text-sm">
+            <thead class="bg-slate-50 font-semibold">
+              <tr class="hover:bg-slate-100">
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">ID</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Nombre</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Apellido</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Dirección</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Teléfono</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Email</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr th:each="cliente : ${clientes}" class="border-t border-[#cedbe8] hover:bg-slate-100">
-                <td class="px-4 py-2" th:text="${cliente.idCliente}"></td>
-                <td class="px-4 py-2" th:text="${cliente.nombre}"></td>
-                <td class="px-4 py-2" th:text="${cliente.apellido}"></td>
-                <td class="px-4 py-2" th:text="${cliente.direccion}"></td>
-                <td class="px-4 py-2" th:text="${cliente.telefono}"></td>
-                <td class="px-4 py-2" th:text="${cliente.email}"></td>
-                <td class="px-4 py-2">
+              <tr th:each="cliente : ${clientes}" class="border-t border-gray-200">
+                <td class="px-4 py-2 text-sm text-gray-900" th:text="${cliente.idCliente}"></td>
+                <td class="px-4 py-2 text-sm text-gray-900" th:text="${cliente.nombre}"></td>
+                <td class="px-4 py-2 text-sm text-gray-900" th:text="${cliente.apellido}"></td>
+                <td class="px-4 py-2 text-sm text-gray-900" th:text="${cliente.direccion}"></td>
+                <td class="px-4 py-2 text-sm text-gray-900" th:text="${cliente.telefono}"></td>
+                <td class="px-4 py-2 text-sm text-gray-900" th:text="${cliente.email}"></td>
+                <td class="px-4 py-2 text-sm">
                   <a th:href="@{'/clientes/ver/' + ${cliente.idCliente}}" 
                     class="text-blue-600 hover:underline">Ver</a>
                   |
@@ -68,5 +68,7 @@
       </div>
     </div>
   </div>
+  <!-- Footer igual para todas las paginas, usando fragmentos -->
+  <div th:replace="fragmentos/footer :: footer"></div>
 </body>
 </html>

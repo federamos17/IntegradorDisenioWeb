@@ -20,14 +20,16 @@
       <div class="w-full max-w-[512px]">
         <h1 class="text-2xl font-bold mb-6 text-[#0f151a]">Registro / Modificación de Pedido</h1>
 
-        <form th:action="@{/pedidos/guardar}" th:object="${pedido}" method="post" class="space-y-4">
+        <form th:action="@{/pedidos/guardar}" th:object="${pedido}" method="post" enctype="multipart/form-data" class="space-y-4" >
           <!-- ID oculto para editar -->
           <input type="hidden" th:field="*{idPedido}" />
 
           <!-- Cliente -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Cliente</span>
-            <select th:field="*{cliente.idCliente}" class="form-select rounded-xl bg-[#e9edf2] h-14 p-4">
+            <span class="text-base font-medium pb-1">
+              Cliente <span class="text-red-600">*</span>
+            </span>
+            <select th:field="*{cliente.idCliente}" required class="form-select rounded-xl bg-[#e9edf2] h-14 p-4">
               <option value="">Seleccione un cliente</option>
               <option th:each="cliente : ${clientes}"
                       th:value="${cliente.idCliente}"
@@ -38,15 +40,19 @@
 
           <!-- Fecha de Pedido -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Fecha de Pedido</span>
-            <input type="date" th:field="*{fechaPedido}"
+            <span class="text-base font-medium pb-1">
+              Fecha de Pedido <span class="text-red-600">*</span>
+            </span>
+            <input type="date" th:field="*{fechaPedido}" required
               class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
           </label>
 
           <!-- Descripción del Trabajo -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Descripción del Trabajo</span>
-            <textarea th:field="*{descripcionTrabajo}" placeholder="Detalle del trabajo"
+            <span class="text-base font-medium pb-1">
+              Descripción del Trabajo <span class="text-red-600">*</span>
+            </span>
+            <textarea th:field="*{descripcionTrabajo}" required placeholder="Detalle del trabajo"
               class="form-textarea rounded-xl bg-[#e9edf2] p-4 h-24"></textarea>
           </label>
 
@@ -64,15 +70,19 @@
 
           <!-- Presupuesto -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Presupuesto</span>
-            <input type="number" step="0.01" th:field="*{presupuesto}" placeholder="Ej: 1000.00"
+            <span class="text-base font-medium pb-1">
+              Presupuesto <span class="text-red-600">*</span>
+            </span>
+            <input type="number" step="0.01" required th:field="*{presupuesto}" placeholder="Ej: 1000.00"
               class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
           </label>
 
           <!-- Fecha de Entrega -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Fecha de Entrega</span>
-            <input type="date" th:field="*{fechaEntrega}"
+            <span class="text-base font-medium pb-1">
+              Fecha de Entrega <span class="text-red-600">*</span>
+            </span>
+            <input type="date" th:field="*{fechaEntrega}" required
               class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
           </label>
 
@@ -85,21 +95,26 @@
 
           <!-- Archivo de Diseño (opcional) -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Archivo de Diseño</span>
-            <input th:field="*{archivoDiseño}" placeholder="URL o nombre del archivo"
-              class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
+            <span class="text-base font-medium pb-1">
+              Archivo de Diseño
+            </span>
+            <input type="file" name="archivo" 
+              class="form-input rounded-xl bg-[#e9edf2] p-4" 
+              accept=".jpg,.jpeg,.png,.pdf,.ai,.psd,.svg"/>
           </label>
 
           <!-- BOTONES -->
           <div class="flex justify-end gap-3">
             <a href="/pedidos"
-              class="rounded-full bg-[#e9edf2] px-4 py-2 text-sm font-bold text-[#0f151a]">Cancelar</a>
+              class="rounded-full bg-[#e9edf2] text-[#0f151a] px-4 py-2 text-sm font-bold hover:bg-[#d2d8de] transition">Cancelar</a>
             <button type="submit"
-              class="rounded-full bg-[#2e7ac0] px-4 py-2 text-sm font-bold text-white">Guardar</button>
+              class="rounded-full bg-[#2e7ac0] text-white px-4 py-2 text-sm font-bold hover:bg-[#215a8f] transition">Guardar</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+  <!-- Footer igual para todas las paginas, usando fragmentos -->
+  <div th:replace="fragmentos/footer :: footer"></div>
 </body>
 </html>

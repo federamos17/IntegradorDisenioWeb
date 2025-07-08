@@ -26,29 +26,33 @@
           
           <!-- NOMBRE -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Nombre</span>
+            <span class="text-base font-medium pb-1">Nombre <span class="text-red-600">*</span></span>
             <input th:field="*{nombre}" placeholder="Ingrese el nombre"
+              required
               class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
           </label>
 
           <!-- APELLIDO -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Apellido</span>
+            <span class="text-base font-medium pb-1">Apellido <span class="text-red-600">*</span></span>
             <input th:field="*{apellido}" placeholder="Ingrese el apellido"
+              required
               class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
           </label>
 
           <!-- DIRECCIÓN -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Dirección</span>
+            <span class="text-base font-medium pb-1">Dirección <span class="text-red-600">*</span></span>
             <input th:field="*{direccion}" placeholder="Ingrese la dirección"
+              required
               class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
           </label>
 
           <!-- LOCALIDAD (con Provincia) -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Localidad</span>
+            <span class="text-base font-medium pb-1">Localidad <span class="text-red-600">*</span></span>
             <select th:field="*{localidad.idLocalidad}"
+              required
               class="form-select rounded-xl bg-[#e9edf2] h-14 p-4">
               <option value="">Seleccione una localidad</option>
               <option th:each="loc : ${localidades}"
@@ -60,15 +64,23 @@
 
           <!-- TELÉFONO -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Teléfono/Celular</span>
+            <span class="text-base font-medium pb-1">Teléfono/Celular <span class="text-red-600">*</span></span>
             <input th:field="*{telefono}" placeholder="Ingrese el teléfono/celular"
+              required
               class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
           </label>
 
           <!-- EMAIL -->
           <label class="flex flex-col">
-            <span class="text-base font-medium pb-1">Correo electrónico</span>
-            <input th:field="*{email}" placeholder="Ingrese el correo electrónico"
+            <span class="text-base font-medium pb-1">
+              Correo electrónico <span class="text-red-600">*</span>
+            </span>
+            <input 
+              th:field="*{email}" 
+              placeholder="Ingrese el correo electrónico"
+              required
+              type="email"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               class="form-input rounded-xl bg-[#e9edf2] h-14 p-4" />
           </label>
 
@@ -92,13 +104,15 @@
           <!-- BOTONES -->
           <div class="flex justify-end gap-3">
             <a href="/clientes"
-              class="rounded-full bg-[#e9edf2] px-4 py-2 text-sm font-bold text-[#0f151a]">Cancelar</a>
+              class="rounded-full bg-[#e9edf2] text-[#0f151a] px-4 py-2 text-sm font-bold hover:bg-[#d2d8de] transition">Cancelar</a>
             <button type="submit"
-              class="rounded-full bg-[#2e7ac0] px-4 py-2 text-sm font-bold text-white">Guardar</button>
+              class="rounded-full bg-[#2e7ac0] text-white px-4 py-2 text-sm font-bold hover:bg-[#215a8f] transition">Guardar</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+  <!-- Footer igual para todas las paginas, usando fragmentos -->
+  <div th:replace="fragmentos/footer :: footer"></div>
 </body>
 </html>

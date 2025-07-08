@@ -1,7 +1,6 @@
 package com.imprenta.tucan.controller;
 
 import com.imprenta.tucan.entity.Localidad;
-import com.imprenta.tucan.entity.Provincia;
 import com.imprenta.tucan.service.LocalidadService;
 import com.imprenta.tucan.service.ProvinciaService;
 import lombok.RequiredArgsConstructor;
